@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 import sqlite3
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/")
@@ -36,6 +38,7 @@ def doar():
     autor = dados.get("autor")
     imagem_url = dados.get("imagem_url")
 
+    # Verifica se todos os campos foram preenchidos corretamente
     if not titulo or not categoria or not autor or not imagem_url:
         return jsonify({"Erro": "Todos os campos são obrigatórios"}), 400
 
